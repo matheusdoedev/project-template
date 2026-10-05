@@ -45,9 +45,7 @@ System_Boundary(system, "System") {
 |---|---|---|---|
 | TBD | TBD | TBD | TBD |
 
-**Diagram source or link:** TBD
-
-### 4.3 Interactions (UML)
+### 3.3 Interactions (UML)
 
 Choose a representative scenario. Describe its trigger and important success or failure paths; add a UML sequence or activity diagram.
 
@@ -55,7 +53,7 @@ Choose a representative scenario. Describe its trigger and important success or 
 **Diagram source or link:** TBD  
 **Important behavior:** TBD
 
-### 4.4 Deployment and Runtime
+### 3.4 Deployment and Runtime
 
 Show environments, nodes or services, network boundaries, and relevant runtime relationships. Mark this view TBD if deployment is not yet decided.
 
