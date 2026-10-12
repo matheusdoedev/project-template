@@ -10,40 +10,18 @@
 | Feature name | `<name>` |
 | Product / system | `<name>` |
 | Owner | `<product owner / analyst>` |
-| Engineering owner | `<name / team>` |
-| Design owner | `<name / team>` |
 | Status | `Discovery / Draft / Ready / In progress / Released / Deprecated` |
 | Version | `<x.y>` |
 | Last updated | `<YYYY-MM-DD>` |
 | Target release | `<release or milestone, not a promise>` |
 | Product brief | `<link>` |
 | Architecture | `<link>` |
-| Related ADRs | `<links>` |
 
 ## 1. Summary
 
 ### 1.1 Feature Statement
 
 **As a** `<persona or actor>`, **I want** `<capability>`, **so that** `<outcome>`.
-
-### 1.2 Problem and Evidence
-
-`<Describe the user problem and cite research, analytics, support evidence, or a validated business need.>`
-
-### 1.3 Expected Value
-
-| Value type | Expected outcome | Measurement |
-|---|---|---|
-| User | `<outcome>` | `<signal>` |
-| Business | `<outcome>` | `<metric>` |
-| Operational | `<outcome>` | `<metric>` |
-
-### 1.4 Scope
-
-- **In scope:** `<behaviors and surfaces>`
-- **Out of scope:** `<explicit exclusions>`
-- **Dependencies:** `<systems, teams, policies, prerequisite features>`
-- **Assumptions:** `<assumptions that need validation>`
 
 ## 2. Actors, Permissions, and Preconditions
 
@@ -71,13 +49,13 @@ flowchart TD
 
 ## 4. Functional Behavior
 
-### 4.3 Input Rules
+### 4.1 Input Rules
 
 | Input | Type / format | Required | Validation | Default | Sensitive? | Error message |
 |---|---|---|---|---|---|---|
 | `<field>` | `<type>` | `Yes / No` | `<rules>` | `<default>` | `Yes / No` | `<message>` |
 
-### 4.4 Output Rules
+### 4.2 Output Rules
 
 | Output | Format | Audience / consumer | Data source | Ordering / paging | Empty behavior |
 |---|---|---|---|---|---|
@@ -121,25 +99,13 @@ Feature: <Feature name>
         | <value>   | <value> |
 ```
 
-## 6. Non-Functional Requirements
+## 6. Technical Design
 
-| ID | Attribute | Requirement / scenario | Measure and target | Conditions | Verification |
-|---|---|---|---|---|---|
-| NFR-001 | Performance | `<response behavior>` | `<latency / throughput target>` | `<load profile>` | `<test>` |
-| NFR-002 | Reliability | `<behavior>` | `<error / recovery target>` | `<conditions>` | `<test>` |
-| NFR-003 | Security | `<control or behavior>` | `<verification target>` | `<threat context>` | `<test / review>` |
-| NFR-004 | Privacy | `<data behavior>` | `<minimization / retention target>` | `<context>` | `<review / test>` |
-| NFR-005 | Accessibility | `<behavior>` | `<WCAG criterion / conformance target>` | `<surface>` | `<manual and automated test>` |
-| NFR-006 | Observability | `<events / signals>` | `<coverage / alert target>` | `<environment>` | `<operational test>` |
-| NFR-007 | Compatibility | `<supported clients / versions>` | `<support matrix>` | `<conditions>` | `<compatibility test>` |
-
-## 7. Technical Design
-
-### 7.1 Technical Summary
+### 6.1 Technical Summary
 
 `<Describe the implementation approach at the level necessary for review. Link to an ADR for significant choices.>`
 
-### 7.2 Block Diagram
+### 6.2 Block Diagram
 
 ```mermaid
 flowchart LR
@@ -150,7 +116,7 @@ flowchart LR
   Service --> Telemetry[Telemetry]
 ```
 
-### 7.3 Sequence Diagram
+### 6.3 Sequence Diagram
 
 ```plantuml
 @startuml
@@ -170,7 +136,7 @@ Client --> User: Present result
 @enduml
 ```
 
-### 7.4 Class / Domain Model
+### 6.4 Class / Domain Model
 
 ```plantuml
 @startuml
@@ -187,7 +153,7 @@ AggregateRoot --> ValueObject
 @enduml
 ```
 
-### 7.5 State Model
+### 6.5 State Model
 
 ```mermaid
 stateDiagram-v2
@@ -199,13 +165,13 @@ stateDiagram-v2
   Approved --> [*]
 ```
 
-### 7.6 Data Changes
+### 6.6 Data Changes
 
 | Entity / table | Change | Field | Type | Nullability | Default | Migration / backfill | Retention impact |
 |---|---|---|---|---|---|---|---|
 | `<entity>` | `Add / Modify / Remove` | `<field>` | `<type>` | `<rule>` | `<default>` | `<plan>` | `<impact>` |
 
-### 7.7 API Contract
+### 6.7 API Contract
 
 | Operation | Method / event | Path / topic | Authorization | Request schema | Response / event | Errors | Idempotency |
 |---|---|---|---|---|---|---|---|
@@ -235,55 +201,33 @@ paths:
           description: Conflict
 ```
 
-### 7.8 Events and Messaging
+### 6.8 Events and Messaging
 
 | Event | Producer | Consumer | Trigger | Schema | Delivery semantics | Ordering | Retry / dead letter |
 |---|---|---|---|---|---|---|---|
 | `<event>` | `<producer>` | `<consumer>` | `<trigger>` | `<link>` | `<at-least-once, etc.>` | `<guarantee>` | `<policy>` |
 
-### 7.9 Configuration and Feature Flags
+## 7. Security, Privacy, and Abuse Resistance
 
-| Key / flag | Purpose | Default | Scope | Owner | Removal condition |
-|---|---|---|---|---|---|
-| `<key>` | `<purpose>` | `<value>` | `<environment / tenant / cohort>` | `<owner>` | `<condition>` |
-
-## 8. Security, Privacy, and Abuse Resistance
-
-### 8.1 Security Requirements
+### 7.1 Security Requirements
 
 | ID | Risk / requirement | Control | Verification | Reference |
 |---|---|---|---|---|
 | SEC-001 | `<risk or requirement>` | `<control>` | `<test / review>` | `<OWASP ASVS / policy ID>` |
 
-### 8.2 Authorization Matrix
+### 7.2 Authorization Matrix
 
 | Action | Role A | Role B | Service identity | Audit event |
 |---|---|---|---|---|
 | `<action>` | `Allow / Deny / Conditional` | `<value>` | `<value>` | `<event>` |
 
-### 8.3 Threat and Misuse Cases
+### 7.3 Threat and Misuse Cases
 
 | ID | Misuse / threat | Preconditions | Impact | Prevention | Detection | Response |
 |---|---|---|---|---|---|---|
 | THR-001 | `<threat>` | `<conditions>` | `<impact>` | `<control>` | `<signal>` | `<response>` |
 
-## 9. Observability and Analytics
-
-### 9.1 Product Analytics
-
-| Event | Trigger | Properties | Privacy classification | Success metric |
-|---|---|---|---|---|
-| `<event>` | `<trigger>` | `<properties>` | `<class>` | `<metric>` |
-
-### 9.2 Operational Telemetry
-
-| Signal | Name | Dimensions | Alert condition | Dashboard / query | Runbook |
-|---|---|---|---|---|---|
-| Metric | `<name>` | `<dimensions>` | `<condition>` | `<link>` | `<link>` |
-| Log | `<event>` | `<fields>` | `<condition>` | `<link>` | `<link>` |
-| Trace | `<span>` | `<attributes>` | `<condition>` | `<link>` | `<link>` |
-
-## 10. Failure, Recovery, and Compatibility
+## 8. Failure, Recovery, and Compatibility
 
 | Scenario | Expected behavior | User message | Retry / recovery | Data guarantee | Test |
 |---|---|---|---|---|---|
@@ -298,52 +242,7 @@ paths:
 - Existing client behavior: `<rules>`
 - Deprecation plan: `<plan>`
 
-## 11. Test Strategy
-
-| Test level | Scope | Key cases | Environment / data | Automation | Evidence |
-|---|---|---|---|---|---|
-| Unit | `<scope>` | `<cases>` | `<setup>` | `<yes/no>` | `<link>` |
-| Integration | `<scope>` | `<cases>` | `<setup>` | `<yes/no>` | `<link>` |
-| Contract | `<scope>` | `<cases>` | `<setup>` | `<yes/no>` | `<link>` |
-| End-to-end | `<scope>` | `<cases>` | `<setup>` | `<yes/no>` | `<link>` |
-| Accessibility | `<scope>` | `<cases>` | `<assistive tech>` | `<mixed>` | `<link>` |
-| Security | `<scope>` | `<cases>` | `<setup>` | `<mixed>` | `<link>` |
-| Performance | `<scope>` | `<load model>` | `<setup>` | `<yes/no>` | `<link>` |
-| Resilience | `<scope>` | `<faults>` | `<setup>` | `<yes/no>` | `<link>` |
-
-### Test Data
-
-- Data source: `<synthetic / masked / generated>`
-- Sensitive-data safeguards: `<controls>`
-- Required fixtures: `<fixtures>`
-- Cleanup / isolation: `<approach>`
-
-## 12. Rollout and Operations
-
-### 12.1 Rollout Plan
-
-| Stage | Audience / traffic | Entry criteria | Monitoring | Exit / rollback criteria |
-|---|---|---|---|---|
-| Internal | `<cohort>` | `<criteria>` | `<signals>` | `<criteria>` |
-| Limited | `<cohort>` | `<criteria>` | `<signals>` | `<criteria>` |
-| General | `<cohort>` | `<criteria>` | `<signals>` | `<criteria>` |
-
-### 12.2 Migration and Backfill
-
-- Migration steps: `<summary or runbook link>`
-- Backfill approach: `<approach>`
-- Validation: `<checks>`
-- Reversibility: `<rollback / forward-fix>`
-
-### 12.3 Support Readiness
-
-- Runbook: `<link>`
-- Known errors / troubleshooting: `<link>`
-- Support owner: `<team>`
-- Alerts: `<links>`
-- User communication: `<plan>`
-
-## 13. Dependencies, Risks, and Open Questions
+## 9. Dependencies, Risks, and Open Questions
 
 ### Dependencies
 
@@ -357,44 +256,7 @@ paths:
 |---|---|---|---|---|---|---|
 | RSK-001 | `<risk>` | `<rating>` | `<rating>` | `<mitigation>` | `<trigger>` | `<owner>` |
 
-### Open Questions
-
-| ID | Question | Decision owner | Needed by | Status / resolution |
-|---|---|---|---|---|
-| OQ-001 | `<question>` | `<owner>` | `<milestone>` | `Open / Resolved: <answer>` |
-
-## 14. Traceability
-
-| Product goal | Feature requirement | Acceptance scenario | Design element | Test | Telemetry |
-|---|---|---|---|---|---|
-| `<goal ID>` | `<FR/NFR/SEC ID>` | `<scenario>` | `<component / API / state>` | `<test ID>` | `<event / metric>` |
-
-## 15. Definition of Ready
-
-- [ ] Problem, evidence, value, scope, and exclusions are clear.
-- [ ] Actors, permissions, preconditions, and business rules are defined.
-- [ ] UX flow and all relevant states are covered.
-- [ ] Functional and non-functional requirements are testable.
-- [ ] Acceptance scenarios include happy, alternate, error, and boundary cases.
-- [ ] API, data, event, state, and deployment impacts are understood.
-- [ ] Security, privacy, accessibility, observability, and compatibility were reviewed.
-- [ ] Dependencies, risks, assumptions, and open questions have owners.
-- [ ] Rollout, rollback, migration, and support needs are defined.
-- [ ] Traceability from goal to telemetry is present.
-
-## 16. Definition of Done
-
-- [ ] All must-have acceptance scenarios pass.
-- [ ] Required automated and manual tests pass.
-- [ ] Security and accessibility verification evidence is attached.
-- [ ] Telemetry, dashboards, alerts, and runbooks are operational.
-- [ ] Data migration and rollback were validated where applicable.
-- [ ] Documentation, API contracts, and diagrams reflect the released behavior.
-- [ ] Feature flags have an owner and removal condition.
-- [ ] Known limitations and residual risks are recorded.
-- [ ] Product owner and required reviewers accepted the evidence.
-
-## 17. References
+## 10. References
 
 ### Primary references
 
